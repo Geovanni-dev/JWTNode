@@ -207,8 +207,8 @@ api-registro/
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT.
+MIT © Geovani Rodrigues
 
 ---
 
-⭐ Desenvolvido para demonstrar domínio em JWT, Bcrypt e Nodemailer.
+Desenvolvido para praticar e demonstrar conhecimento em JWT, Bcrypt e Nodemailer.

@@ -1,58 +1,52 @@
-![Node.js](https://img.shields.io/badge/Node.js-22.x-green)
-![Express](https://img.shields.io/badge/Express-5.x-blue)
-![Prisma](https://img.shields.io/badge/Prisma-6.x-purple)
-![JWT](https://img.shields.io/badge/JWT-Authentication-orange)
-![Nodemailer](https://img.shields.io/badge/Nodemailer-Email-yellow)
-![Bcrypt](https://img.shields.io/badge/Bcrypt-Hash-red)
-![Zod](https://img.shields.io/badge/Zod-Validation-purple)
+<div align="center">
 
-# 🔐 JWTNode - Autenticação completa com Node.js
+# 🔐 JWTNode
 
-Uma API RESTful robusta com sistema completo de autenticação, incluindo registro com verificação de email, login com JWT, e rotas protegidas com diferentes níveis de permissão (ADMIN/CLIENT).
+<p align="center">
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Zod-3E6B9E?style=for-the-badge&logo=zod&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Nodemailer-22B573?style=for-the-badge&logo=gmail&logoColor=white"/>
+</p>
 
-## 💻 Tecnologias Utilizadas
+API RESTful com sistema completo de autenticação, incluindo registro com verificação de e-mail, login com JWT e rotas protegidas com diferentes níveis de permissão (ADMIN/CLIENT). Desenvolvida para praticar e demonstrar conhecimento em JWT, Bcrypt e Nodemailer.
 
-- **Node.js** - Runtime JavaScript
-- **Express** - Framework web
-- **Prisma** - ORM para banco de dados
-- **SQLite** - Banco de dados (substituível)
-- **JWT** - Autenticação por token
-- **Bcrypt** - Hash de senhas
-- **Zod** - Validação de dados
-- **Nodemailer** - Envio de emails
+</div>
 
-## 🚀 Funcionalidades
+---
 
-- ✅ Registro de usuários
-- ✅ Verificação de email com código de 6 dígitos
-- ✅ Login com geração de JWT token
-- ✅ Rotas protegidas por autenticação
-- ✅ Níveis de acesso (ADMIN / CLIENT)
-- ✅ CRUD completo de usuários (apenas ADMIN)
-- ✅ Validação de dados com Zod
-- ✅ Hash de senhas com Bcrypt
-- ✅ Seed automático de usuário ADMIN
+## ⚡ Funcionalidades
 
-## 📋 Pré-requisitos
+| Funcionalidade | Descrição |
+|----------------|-----------|
+| 📝 **Registro** | Criação de conta com validação de dados via Zod |
+| 📧 **Verificação de E-mail** | Código de 6 dígitos enviado por Nodemailer |
+| 🔐 **Login com JWT** | Token com expiração de 1 dia |
+| 🛡️ **Rotas Protegidas** | Middleware de autenticação por token |
+| 👑 **Níveis de Acesso** | Permissões separadas para ADMIN e CLIENT |
+| 👥 **CRUD de Usuários** | Gerenciamento completo apenas para ADMIN |
+| 🔑 **Hash de Senhas** | Bcrypt com salt 10 |
+| 🌱 **Seed Automático** | Criação automática de usuário ADMIN |
+| 🚦 **Rate Limit** | Proteção contra spam e força bruta nas rotas de autenticação |
 
-- Node.js (v22+)
-- npm ou yarn
-- Conta de email para envio (Gmail, Outlook, etc)
+---
 
-## 🔧 Instalação
+## 🚀 Instalação e Execução
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/authapi.git
-cdJWTNode
+git clone https://github.com/Geovanni-dev/JWTNode.git
+cd JWTNode
 
 # Instale as dependências
 npm install
 
-# Configure as variáveis de ambiente
+# Configure o arquivo .env
 cp .env.example .env
 
-# Execute as migrações do Prisma
+# Execute as migrações do banco
 npx prisma migrate dev
 
 # Execute o seed para criar o ADMIN
@@ -62,153 +56,86 @@ npx prisma db seed
 npm run dev
 ```
 
-## ⚙️ Configuração do .env
+---
+
+## ⚙️ Variáveis de Ambiente
 
 ```env
-# Servidor
 PORT=3000
-
-# JWT
 JWT_SECRET=seu_secret_jwt_aqui
-
-# Email (Nodemailer)
 MAIL_HOST=smtp.gmail.com
 MAIL_PORT=465
 MAIL_USER=seuemail@gmail.com
 MAIL_PASS=suasenhaapp
 ```
 
-## 📚 Rotas da API
+---
 
-### 🔓 Rotas Públicas
+## 📡 Endpoints
 
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| POST | `/users/register` | Criar nova conta |
-| POST | `/users/verify-code` | Verificar código de email |
-| POST | `/users/login` | Fazer login |
+### 🔓 Rotas Públicas (`/users`)
 
-### 🔒 Rotas Protegidas (ADMIN apenas)
+| Rota | Método | Payload (Body) | Descrição |
+|------|--------|----------------|-----------|
+| `/register` | POST | `{"name": "João", "email": "joao@email.com", "password": "123456"}` | Cria nova conta |
+| `/verify-code` | POST | `{"email": "joao@email.com", "code": "ABC123"}` | Verifica código de e-mail |
+| `/login` | POST | `{"email": "joao@email.com", "password": "123456"}` | Retorna token JWT |
 
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| GET | `/users` | Listar todos usuários |
-| GET | `/users/:id` | Buscar usuário por ID |
-| DELETE | `/users/:id` | Deletar usuário |
+### 👑 Rotas Protegidas — ADMIN (`/users`)
 
-## 📝 Exemplos de Requisições
+| Rota | Método | Auth | Descrição |
+|------|--------|------|-----------|
+| `/` | GET | 👑 | Lista todos os usuários |
+| `/?role=ADMIN` | GET | 👑 | Filtra por role |
+| `/?name=João` | GET | 👑 | Filtra por nome |
+| `/?email=joao@email.com` | GET | 👑 | Filtra por e-mail |
+| `/:id` | GET | 👑 | Busca usuário por ID |
+| `/:id` | DELETE | 👑 | Deleta usuário |
 
-### Registrar usuário
+> ⚠️ Rotas protegidas exigem o Header: `Authorization: Bearer <seu_token_jwt>`
 
-```bash
-POST /users/register
-Content-Type: application/json
-```
+---
 
-```json
-{
-    "name": "João Silva",
-    "email": "joao@email.com",
-    "password": "123456"
-}
-```
-
-### Verificar código
-
-```bash
-POST /users/verify-code
-Content-Type: application/json
-```
-
-```json
-{
-    "email": "joao@email.com",
-    "code": "ABC123"
-}
-```
-
-### Login
-
-```bash
-POST /users/login
-Content-Type: application/json
-```
-
-```json
-{
-    "email": "joao@email.com",
-    "password": "123456"
-}
-```
-
-### Listar usuários (ADMIN)
-
-```bash
-GET /users
-Authorization: Bearer SEU_TOKEN_AQUI
-```
-
-### Filtrar usuários
-
-```bash
-GET /users?role=ADMIN
-GET /users?name=João
-GET /users?email=joao@email.com
-```
-
-## 🗂️ Estrutura do Projeto
+## 🗂️ Arquitetura do Projeto
 
 ```
 api-registro/
 ├── prisma/
+│   ├── migrations/
 │   ├── schema.prisma
 │   └── seed.js
 ├── src/
-│   ├── users/
-│   │   ├── controller/
-│   │   │   └── userController.js
-│   │   └── routes/
-│   │       └── userRoutes.js
+│   ├── lib/
+│   │   └── prisma.js
 │   ├── middlewares/
-│   │   └── authController.js
+│   │   ├── authController.js
+│   │   └── rateLimit.js
 │   ├── services/
 │   │   └── emailService.js
-│   └── lib/
-│       └── prisma.js
+│   └── users/
+│       ├── controller/
+│       │   └── userController.js
+│       └── routes/
+│           └── userRoutes.js
 ├── .env
 ├── server.js
 └── package.json
 ```
 
-## 🔐 Segurança
+---
 
-- Senhas hasheadas com Bcrypt (salt 10)
-- Tokens JWT com expiração (1 dia)
-- Verificação obrigatória de email
-- Validação de dados com Zod
-- Proteção de rotas por middleware
+## 🛠️ Tecnologias
 
-## 📦 Dependências Principais
-
-```json
-{
-    "@prisma/client": "^6.19.3",
-    "bcrypt": "^6.0.0",
-    "jsonwebtoken": "^9.0.3",
-    "nodemailer": "^8.0.4",
-    "zod": "^4.3.6",
-    "express": "^5.2.1"
-}
-```
-
-## 👨‍💻 Autor
-
-**Geovani** - [GitHub.com/Geovanni-dev](https://github.com/Geovanni-dev)
-
-## 📄 Licença
-
-MIT © Geovani Rodrigues
+- **Node.js & Express** — Ambiente de execução e framework web
+- **Prisma & SQLite** — ORM e banco de dados (substituível por PostgreSQL)
+- **JSON Web Token (JWT)** — Autenticação baseada em tokens
+- **Bcrypt** — Hash de senhas com salt 10
+- **Nodemailer** — Envio de e-mails para verificação de conta
+- **Zod** — Validação de schemas e integridade dos dados
+- **Express Rate Limit** — Proteção contra spam e ataques de força bruta
 
 ---
 
-Desenvolvido para praticar e demonstrar conhecimento em JWT, Bcrypt e Nodemailer.
+## 📄 Licença
+
+**MIT © [Geovani Rodrigues](https://github.com/Geovanni-dev)**

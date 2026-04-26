@@ -5,6 +5,8 @@ const express = require("express"); /// importa o módulo express
 const app = express();// cria a aplicação express
 app.use(express.json()); //middleware que permite o express entender requisições com corpo em formato JSON
 
+const { limiter } = require("./src/middlewares/rateLimit"); // importando o middleware de rate limit
+app.use(limiter); // usando o middleware de rate limit na aplicação express
 
 // importando as rotas de usuario
 const userRoutes = require("./src/users/routes/userRoutes");

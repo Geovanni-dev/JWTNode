@@ -9,6 +9,7 @@
   <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white"/>
   <img src="https://img.shields.io/badge/Zod-3E6B9E?style=for-the-badge&logo=zod&logoColor=white"/>
   <img src="https://img.shields.io/badge/Nodemailer-22B573?style=for-the-badge&logo=gmail&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
 </p>
 
 API RESTful com sistema completo de autenticação, incluindo registro com verificação de e-mail, login com JWT e rotas protegidas com diferentes níveis de permissão (ADMIN/CLIENT). Desenvolvida para praticar e demonstrar conhecimento em JWT, Bcrypt e Nodemailer.
@@ -35,11 +36,26 @@ API RESTful com sistema completo de autenticação, incluindo registro com verif
 
 ## 🚀 Instalação e Execução
 
+### Clone o repositório
 ```bash
-# Clone o repositório
-git clone https://github.com/Geovanni-dev/JWTNode.git
+git clone [https://github.com/Geovanni-dev/JWTNode.git](https://github.com/Geovanni-dev/JWTNode.git)
 cd JWTNode
+```
 
+### Opção 1: Com Docker
+```bash
+# Configure o arquivo .env
+cp .env.example .env
+
+# Inicie os containers em segundo plano
+docker compose up -d
+
+# Execute o seed para criar o ADMIN dentro do container
+docker exec -it JWTNode npx prisma db seed
+```
+
+### Opção 2: Local
+```bash
 # Instale as dependências
 npm install
 
@@ -98,7 +114,7 @@ MAIL_PASS=suasenhaapp
 
 ## 🗂️ Arquitetura do Projeto
 
-```
+```text
 api-registro/
 ├── prisma/
 │   ├── migrations/
@@ -118,6 +134,8 @@ api-registro/
 │       └── routes/
 │           └── userRoutes.js
 ├── .env
+├── docker-compose.yml
+├── Dockerfile
 ├── server.js
 └── package.json
 ```
@@ -133,9 +151,8 @@ api-registro/
 - **Nodemailer** — Envio de e-mails para verificação de conta
 - **Zod** — Validação de schemas e integridade dos dados
 - **Express Rate Limit** — Proteção contra spam e ataques de força bruta
+- **Docker** — Containerização e orquestração de ambiente
 
 ---
 
 ## 📄 Licença
-
-**MIT © [Geovani Rodrigues](https://github.com/Geovanni-dev)**

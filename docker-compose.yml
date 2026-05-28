@@ -1,0 +1,22 @@
+# serviços que vão ser executados pelo Docker
+services:
+  
+  # serviço da API Node
+  api:
+    
+    # digo para o Compose construir a imagem usando o dockerfile que criei nesta mesma pasta
+    build: .
+    
+    # nome para identificar o container da minha API
+    container_name: JWTNode
+    
+    # libero o acesso mapeando a porta 3000 do container para a porta 3000 do meu Windows
+    ports:
+      - "3000:3000"
+    
+    #garanto que o Docker vai injetar na memória apenas as variáveis que configurei para ele
+    env_file:
+      - .env
+    # cria uma ponte em tempo real entre a pasta prisma do meu PC e a pasta prisma do container
+    volumes:
+      - ./prisma:/app/prisma

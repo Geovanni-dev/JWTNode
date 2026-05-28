@@ -36,11 +36,10 @@ API RESTful com sistema completo de autenticação, incluindo registro com verif
 
 ## 🚀 Instalação e Execução
 
-### Clone o repositório
-```bash
-git clone [https://github.com/Geovanni-dev/JWTNode.git](https://github.com/Geovanni-dev/JWTNode.git)
-cd JWTNode
-```
+### Clone o repositório:
+
+#### git clone [https://github.com/Geovanni-dev/JWTNode.git](https://github.com/Geovanni-dev/JWTNode.git)
+#### cd JWTNode
 
 ### Opção 1: Com Docker
 ```bash

@@ -1,26 +1,26 @@
-# vou usar a mesma versao do Node que tenho instalada no meu Windows, rodando num Linux leve
+# usa uma versao estavel do node baseada em linux alpine para reduzir o tamanho da imagem
 FROM node:22.20.0-alpine
 
-# crio a pasta onde meu codigo vai ficar guardado dentro do container
+# define o diretorio de trabalho interno do container onde o app vai rodar
 WORKDIR /app
 
-# copio meus arquivos de configuração de pacotes antes do resto do codigo
+# copia os arquivos de mapeamento de dependencias antes do restante do codigo
 COPY package*.json ./
 
-# instalo as dependências do meu projeto direto no ambiente do container
+# instala as dependencias de forma isolada dentro do container
 RUN npm install
 
-# copio minha pasta do Prisma separada para conseguir rodar o generate
+# copia a pasta do prisma primeiro para gerar o client na arquitetura do container
 COPY prisma ./prisma/
 
-# gero o Prisma Client especifico para a arquitetura Linux do container
+# gera o prisma client especifico para o ambiente linux do docker
 RUN npx prisma generate
 
-# agora copio todo o resto dos arquivos do meu projeto
+# copia todos os arquivos restantes do projeto para o container
 COPY . .
 
-# informa que minha API vai escutar os acessos na porta 3000
+# expoe a porta interna que a api vai utilizar para receber requisicoes
 EXPOSE 3000
 
-# executa o comando oficial para ligar a minha API em produção
+# executa o servidor com node puro para maxima performance em producao
 CMD ["node", "server.js"]

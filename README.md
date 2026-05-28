@@ -155,3 +155,5 @@ api-registro/
 ---
 
 ## 📄 Licença
+
+**MIT © Geovani Rodrigues**

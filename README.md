@@ -114,9 +114,10 @@ MAIL_PASS=suasenhaapp
 ## 🗂️ Arquitetura do Projeto
 
 ```text
-api-registro/
+JWTNode/
 ├── prisma/
 │   ├── migrations/
+│   ├── dev.db        
 │   ├── schema.prisma
 │   └── seed.js
 ├── src/
@@ -132,11 +133,13 @@ api-registro/
 │       │   └── userController.js
 │       └── routes/
 │           └── userRoutes.js
-├── .env
+├── .dockerignore
+├── .env.example
+├── .gitignore
 ├── docker-compose.yml
 ├── Dockerfile
-├── server.js
-└── package.json
+├── package.json
+└── server.js
 ```
 
 ---

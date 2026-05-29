@@ -15,8 +15,8 @@ function generateVerificationCode() {
 // funçao de transport
 const transporter = nodemailer.createTransport({
     host: process.env.MAIL_HOST, // host do servidor de email, definido na variavel de ambiente MAIL_HOST
-    port: process.env.MAIL_PORT, // porta do servidor de email, definida na variavel de ambiente MAIL_PORT
-    secure: true, // indica que a conexao deve ser segura SSL/TLS
+    port: Number(process.env.MAIL_PORT), // porta do servidor de email, definida na variavel de ambiente MAIL_PORT
+    secure: Number(process.env.MAIL_PORT) === 465, // so vira true para a porta 465, outras ports vao ser false
     auth: {
         user: process.env.MAIL_USER, // usuario do servidor de email, definido na variavel de ambiente MAIL_USER
         pass: process.env.MAIL_PASS // senha do servidor de email, definida na variavel de ambiente MAIL_PASS

@@ -3,10 +3,7 @@ const router = express.Router(); // criando uma rota com o express
 const userController = require('../controller/userController'); // importando as funcoes do controller de usuario
 const { verifyToken } = require('../../middlewares/authController'); // importando a funçao de verificar o token
 
-
-
 //===============================rotas de usuario/admin
-
 
 // rota para criar um usuario
 router.post('/register', userController.createUser); // rota para criar um usuario, chama a funçao createUser do controller de usuario
@@ -24,6 +21,6 @@ router.get('/', verifyToken, userController.listAllUsers); // rota para listar t
 router.get('/:id', verifyToken, userController.listUserById); // rota para listar um usuario por id, chama a funçao listUserById do controller de usuario, a rota é protegida pela funçao de verificar o token
 
 // rota para deletar um usuario
-router.delete('/:id', verifyToken, userController.deleteUser); // rota para deletar um usuario, chama a funçao deleteUser do controller de usuario, a rota é protegida pela funçao de verificar o token   
+router.delete('/:id', verifyToken, userController.deleteUser); // rota para deletar um usuario, chama a funçao deleteUser do controller de usuario, a rota é protegida pela funçao de verificar o token
 
 module.exports = router; // exportando o router
